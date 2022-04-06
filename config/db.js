@@ -5,10 +5,9 @@ const db = new Sequelize(
   process.env.DB_USER,
   process.env.DB_PASSWORD,
   {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    host: "d6rii63wp64rsfb5.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    port: 3306,
     dialect: "mysql",
-    dialectOptions: {},
     define: {
       timestamps: 0,
     },
