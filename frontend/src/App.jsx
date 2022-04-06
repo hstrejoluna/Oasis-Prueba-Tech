@@ -59,6 +59,7 @@ export const App = () => {
   const [bars, setBars] = useState([]);
   const [details, setDetails] = useState({});
   const [hour, setHour] = useState(hourFormat);
+  const [iapi, setIiapi] = useState(true);
   const [daynDate] = useState({
     day: new Date().getDay() + 1,
     date: new Date().toLocaleString("es-MX", {
@@ -70,12 +71,10 @@ export const App = () => {
   });
   const url_img = "https://api-onow.oasishoteles.net/";
   useEffect(() => {
-    getData(daynDate.day, 2, hour);
-    getData(daynDate.day, 3, hour);
     const interval = setInterval(() => setHour(hourFormat, 60 * 1000));
     async function getData(day, endpoint, hour) {
       const res = await fetch(
-        `http://localhost:5000/data/${day}/${endpoint}/${hour}`
+        `https://oasistestbackend.herokuapp.com/${day}/${endpoint}/${hour}`
       );
       const data = await res.json();
       if (endpoint === 2) {
@@ -84,6 +83,11 @@ export const App = () => {
       if (endpoint === 3) {
         setBars(data);
       }
+    }
+    if (iapi) {
+      setIiapi(false);
+      getData(daynDate.day, 2, hour);
+      getData(daynDate.day, 3, hour);
     }
     return () => {
       clearInterval(interval);
