@@ -55,61 +55,12 @@ const AppI = styled.div`
 `;
 
 export const App = () => {
-
   const url_img = "https://api-onow.oasishoteles.net/";
-  useEffect(() => {
-    async function getData(day, endpoint, hour) {
-      const res = await fetch(
-        `https://oasistestbackend.herokuapp.com/data/${day}/${endpoint}/${hour}`
-      );
-      const data = await res.json();
-      if (endpoint === 2) {
-        setRestaurants(data);
-      }
-      if (endpoint === 3) {
-        setBars(data);
-      }
-    }
-    if (iapi) {
-      setIiapi(false);
-      getData(daynDate.day, 2, hour);
-      getData(daynDate.day, 3, hour);
-    }
-    return () => {
-      clearInterval(interval);
-    };
-  }, [daynDate.day, hour]);
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    let idcent = parseInt(e.target.getAttribute("data-id"));
-    setDetails(bars.concat(restaurants).filter((e) => e.id === idcent)[0]);
-  };
 
   return (
     <AppI>
-      <Nav hours12={hours12} hour={hour} date={daynDate.date} />
-      <section className="container">
-        <div className="column">
-          <h1 className="coltitle">Restaurantes</h1>
-          <div>
-            <Rests
-              restaurants={restaurants}
-              hours12={hours12}
-              handleChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className="column-bar">
-          <h1 className="coltitle">Bares</h1>
-          <div>
-            <Bars bars={bars} hours12={hours12} handleChange={handleChange} />
-          </div>
-        </div>
-        <div className="column-result">
-          <Dets hours12={hours12} url_img={url_img} details={details} />
-        </div>
-      </section>
+      <Nav/>
+      
     </AppI>
   );
 };

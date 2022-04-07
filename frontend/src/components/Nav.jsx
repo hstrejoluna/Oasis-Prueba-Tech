@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const Navbar = styled.div`
   background-color: #bf0811;
   display: flex;
@@ -37,7 +38,7 @@ const Navbar = styled.div`
   }
 `;
 
-export default function NavBar(props) {
+export default function NavBar() {
   return (
     <>
       <Navbar>
