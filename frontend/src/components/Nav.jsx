@@ -55,7 +55,7 @@ export default function NavBar(props) {
   useEffect(() => {
     getHotels();
     async function getHotels() {
-      const res = await fetch(`http://localhost:5000/hotels`);
+      const res = await fetch(`https://oasistestbackend.herokuapp.com/hotels`);
       const data = await res.json();
       setHotels(data);
     }

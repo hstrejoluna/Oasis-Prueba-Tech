@@ -73,7 +73,7 @@ export const App = () => {
 
   async function getData(hotel, day, endpoint, hour) {
     const res = await fetch(
-      `http://localhost:5000/data/${hotel}/${day}/${endpoint}/${hour}`
+      `https://oasistestbackend.herokuapp.com/data/${hotel}/${day}/${endpoint}/${hour}`
     );
     const data = await res.json();
     if (endpoint === 2) {
