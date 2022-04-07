@@ -18,10 +18,7 @@ function oasisReducer(
     },
     hour: new Date().toLocaleTimeString("es-MX", {
       timeZone: "America/Cancun",
-      is12Hour: true,
-      
     }),
-    interval: null,
   },
   action
 ) {
@@ -86,18 +83,6 @@ function oasisReducer(
           type: "oasis/getDayandHour",
           day: action.day,
           hour: action.hour,
-        });
-      };
-
-    case "oasis/interval":
-      return function (dispatch) {
-        const intervalset = setInterval(
-          () => (state.hour = hourFormat),
-          60 * 1000
-        );
-        dispatch({
-          type: "oasis/interval",
-          interval: intervalset,
         });
       };
 
