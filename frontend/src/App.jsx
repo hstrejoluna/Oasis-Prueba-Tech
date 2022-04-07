@@ -58,8 +58,8 @@ export const App = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [bars, setBars] = useState([]);
   const [details, setDetails] = useState({});
+  const [hotel, setHotel] = useState(1);
   const [hour, setHour] = useState(hourFormat);
-  const [iapi, setIiapi] = useState(true);
   const [daynDate] = useState({
     day: new Date().getDay() + 1,
     date: new Date().toLocaleString("es-MX", {
@@ -70,26 +70,20 @@ export const App = () => {
     }),
   });
   const url_img = "https://api-onow.oasishoteles.net/";
-  useEffect(() => {
-    async function getData(day, endpoint, hour) {
-      const res = await fetch(
-        `http://localhost:5000/data/${day}/${endpoint}/${hour}`
-      );
-      const data = await res.json();
-      if (endpoint === 2) {
-        setRestaurants(data);
-        console.log(data);
-      }
-      if (endpoint === 3) {
-        setBars(data);
-      }
+
+  async function getData(hotel, day, endpoint, hour) {
+    const res = await fetch(
+      `http://localhost:5000/data/${hotel}/${day}/${endpoint}/${hour}`
+    );
+    const data = await res.json();
+    if (endpoint === 2) {
+      setRestaurants(data);
+      console.log(data);
     }
-    if (iapi) {
-      setIiapi(false);
-      getData(daynDate.day, 2, hour);
-      getData(daynDate.day, 3, hour);
+    if (endpoint === 3) {
+      setBars(data);
     }
-  }, [daynDate.day, hour]);
+  }
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -97,9 +91,17 @@ export const App = () => {
     setDetails(bars.concat(restaurants).filter((e) => e.id === idcent)[0]);
   };
 
+  const handleHotel = (e) => {
+    e.preventDefault();
+    setHotel(e.target.value);
+    console.log(hotel);
+    getData(hotel, daynDate.day, 2, hour);
+    getData(hotel, daynDate.day, 3, hour);
+  };
+
   return (
     <AppI>
-      <Nav date={daynDate.date} />
+      <Nav date={daynDate.date} setHotel={hotel} handleHotel={handleHotel} />
       <section className="container">
         <div className="column">
           <h1 className="coltitle">Restaurantes</h1>
