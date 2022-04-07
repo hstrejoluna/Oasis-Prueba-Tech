@@ -15,15 +15,3 @@ export const daynDate = {
   }),
 };
 
-// Changer format from "hh:mm:ss" to "hh:mm AM/PM"
-export const hours12 = (hr) => {
-  return (
-    (parseInt(hr.split(":")[0]) >= 12
-      ? parseInt(hr.split(":")[0]) % 12
-      : hr.split(":")[0]) +
-    ":" +
-    hr.split(":")[1] +
-    " " +
-    (parseInt(hr.split(":")[0]) >= 12 ? "PM" : "AM")
-  );
-};
