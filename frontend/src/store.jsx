@@ -67,11 +67,8 @@ function oasisReducer(
             dispatch({
               type: "oasis/fetchRestaurants",
               restaurants: resp,
-              day: action.day,
-              hour: action.hour,
             });
           }
-
           return dispatchRestaurants(await responseJSON);
         } catch (error) {
           console.error("Can't get restaurants! Reason: " + error);
@@ -91,7 +88,7 @@ function oasisReducer(
   }
 }
 
-export const selectHour = (state) => state.hour;
+export const selectRestaurants = (state) => state.restaurants;
 
 export const selectDate = (state) => state.daynDate.date;
 

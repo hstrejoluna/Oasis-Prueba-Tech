@@ -60,7 +60,7 @@ export const App = () => {
   return (
     <AppI>
       <Nav/>
-      
+      <Rests/>
     </AppI>
   );
 };

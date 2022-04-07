@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { selectRestaurants } from "../store";
 
 const RestsList = styled.div`
   .c {
@@ -78,39 +80,16 @@ const RestsList = styled.div`
   }
 `;
 
-export default function Rests(props) {
+export default function Rests() {
+  const dispatch = useDispatch();
+  dispatch({ type: "oasis/fetchRestaurants" });
+  const restaurants = useSelector(selectRestaurants);
+  console.log(restaurants);
   return (
     <>
-      {props.restaurants && (
-        <>
-          {props.restaurants.map((res, ind) => (
-            <RestsList key={ind}>
-              <div className="c" id={res.id} key={ind}>
-                <h5 id="name">{res.nombre}</h5>
-                <p id="concept">{res.concepto_en}</p>
-                <p id="concept">{res.concepto_es}</p>
-                <div className="innerc">
-                  <div className="innertimec">
-                    <span id="isopen"> ABIERTO HOY </span>
-                    <p id="time">
-                      {" "}
-                      {props.hours12(res.hora_inicio)} -
-                      {props.hours12(res.hora_final)}
-                    </p>
-                  </div>
-                  <button
-                    className="incbutton"
-                    data-id={res.id}
-                    onClick={props.handleChange}
-                  >
-                    VER MÁS
-                  </button>
-                </div>
-              </div>
-            </RestsList>
-          ))}
-        </>
-      )}
+      <>
+        <RestsList></RestsList>
+      </>
     </>
   );
 }
