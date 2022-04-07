@@ -71,7 +71,6 @@ export const App = () => {
   });
   const url_img = "https://api-onow.oasishoteles.net/";
   useEffect(() => {
-    const interval = setInterval(() => setHour(hourFormat, 60 * 1000));
     async function getData(day, endpoint, hour) {
       const res = await fetch(
         `http://localhost:5000/data/${day}/${endpoint}/${hour}`
@@ -90,9 +89,6 @@ export const App = () => {
       getData(daynDate.day, 2, hour);
       getData(daynDate.day, 3, hour);
     }
-    return () => {
-      clearInterval(interval);
-    };
   }, [daynDate.day, hour]);
 
   const handleChange = (e) => {
