@@ -3,7 +3,9 @@ import styled from "styled-components";
 const DetsDisplay = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  width: 350px;
+  
   #logo {
     width: 120px;
     height: 120px;
@@ -13,7 +15,7 @@ const DetsDisplay = styled.div`
   }
 
   #background {
-    width: 300px;
+    width: 350px;
     height: 300px;
     z-index: 10;
     margin-bottom: -100px;
