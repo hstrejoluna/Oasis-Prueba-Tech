@@ -6,9 +6,10 @@ import store from "./store";
 import "./index.css";
 import App from "./App";
 
+const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
-  document.getElementById("root")
+  </Provider>,
+  rootElement
 );
