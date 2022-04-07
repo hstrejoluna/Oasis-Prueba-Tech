@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Clock from "react-live-clock";
+import Clock from "react-digital-clock";
 
 import { useSelector, useDispatch } from "react-redux";
 import { selectDate } from "../store";
@@ -20,6 +20,7 @@ const Navbar = styled.div`
     font-size: 20px;
   }
   .clock {
+    text-transform: uppercase;
     align-self: center;
   }
 
@@ -53,12 +54,10 @@ export default function NavBar() {
       <Navbar>
         <div id="timeformat">
           <p className="title">GRAND OASIS CANCUN &ensp;| </p>
-          <Clock
-            format={"HH:mm"}
-            ticking={true}
-            timezone={"America/Cancun"}
-            className="clock"
-          />
+          <div className="clock">
+            <Clock />
+          </div>
+
           <p>{date}</p>
         </div>
       </Navbar>
