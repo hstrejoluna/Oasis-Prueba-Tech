@@ -99,7 +99,7 @@ export const App = () => {
 
   return (
     <AppI>
-      <Nav hours12={hours12} hour={hour} date={daynDate.date} />
+      <Nav date={daynDate.date} />
       <section className="container">
         <div className="column">
           <h1 className="coltitle">Restaurantes</h1>
