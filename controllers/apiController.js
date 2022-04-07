@@ -26,3 +26,18 @@ exports.showData = async (req, res, next) => {
     next();
   }
 };
+
+
+exports.showHotels = async (req, res, next) => {
+  try {
+    const data = await db.query(
+      `
+      SELECT * FROM hoteles;
+      `
+    );
+    res.json(data[0]);
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
