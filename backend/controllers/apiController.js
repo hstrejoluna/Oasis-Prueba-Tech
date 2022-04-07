@@ -1,14 +1,12 @@
 require("dotenv").config({ path: ".env" });
-
 const db = require("../config/db");
 
 exports.showData = async (req, res, next) => {
-
   const { day = "", hotel = 1, hour = "", category = 2 } = req.params;
   try {
     const data = await db.query(
       `
-      SELECT centrosconsumo.id, centrosconsumo.nombre, centrosconsumoh.dia, centrosconsumoh.hora_inicio, centrosconsumoh.hora_final, 
+      SELECT centrosconsumo.id, centrosconsumo.nombre, centrosconsumo.concepto_en, centrosconsumo.concepto_es, centrosconsumoh.dia,  centrosconsumoh.hora_inicio, centrosconsumoh.hora_final, 
       centrosconsumo.logo, img_portada
       FROM centros_consumo AS centrosconsumo
       INNER JOIN centros_consumo_horarios AS centrosconsumoh

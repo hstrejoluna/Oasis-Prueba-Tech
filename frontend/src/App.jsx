@@ -74,11 +74,12 @@ export const App = () => {
     const interval = setInterval(() => setHour(hourFormat, 60 * 1000));
     async function getData(day, endpoint, hour) {
       const res = await fetch(
-        `https://oasistestbackend.herokuapp.com/data/${day}/${endpoint}/${hour}`
+        `http://localhost:5000/data/${day}/${endpoint}/${hour}`
       );
       const data = await res.json();
       if (endpoint === 2) {
         setRestaurants(data);
+        console.log(data);
       }
       if (endpoint === 3) {
         setBars(data);
