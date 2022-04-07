@@ -73,7 +73,7 @@ export const App = () => {
 
   async function getData(hotel, day, endpoint, hour) {
     const res = await fetch(
-      `https://oasistestbackend.herokuapp.com/data/${hotel}/${day}/${endpoint}/${hour}`
+      `http://localhost:5000/data/${hotel}/${day}/${endpoint}/${hour}`
     );
     const data = await res.json();
     if (endpoint === 2) {
@@ -84,6 +84,11 @@ export const App = () => {
       setBars(data);
     }
   }
+
+  useEffect(() => {
+    getData(1, daynDate.day, 2, hour);
+    getData(1, daynDate.day, 3, hour);
+  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
