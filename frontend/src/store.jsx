@@ -1,24 +1,23 @@
 import { createStore } from "redux";
+import { hourFormat, daynDate, hours12 } from "./helpers/hour";
 
-/**
- * This is a reducer - a function that takes a current state value and an
- * action object describing "what happened", and returns a new state value.
- * A reducer's function signature is: (state, action) => newState
- *
- * The Redux state should contain only plain JS objects, arrays, and primitives.
- * The root state value is usually an object. It's important that you should
- * not mutate the state object, but return a new object if the state changes.
- *
- * You can use any conditional logic you want in a reducer. In this example,
- * we use a switch statement, but it's not required.
- */
-function OasisReducer(
+function oasisReducer(
   state = {
     bars: [],
     restaurants: [],
     details: {},
-    day: "",
-    hour: "",
+    iapi: true,
+    daynDate: {
+      day: new Date().getDay() + 1,
+      date: new Date().toLocaleString("es-MX", {
+        timeZone: "America/Cancun",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }),
+    },
+    hour: hourFormat,
+    interval: null,
   },
   action
 ) {
@@ -77,7 +76,27 @@ function OasisReducer(
           console.error("Can't get restaurants! Reason: " + error);
         }
       };
-      case "oasis/getDayandHour":
+    case "oasis/getDayandHour":
+      return function (dispatch) {
+        dispatch({
+          type: "oasis/getDayandHour",
+          day: action.day,
+          hour: action.hour,
+        });
+      };
+
+    case "oasis/interval":
+      return function (dispatch) {
+        const intervalset = setInterval(
+          () => (state.hour = hourFormat),
+          60 * 1000
+        );
+        dispatch({
+          type: "oasis/interval",
+          interval: intervalset,
+        });
+      };
+
     default:
       return state;
   }
@@ -85,7 +104,7 @@ function OasisReducer(
 
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
-let store = createStore(counterReducer);
+let store = createStore(oasisReducer);
 
 // You can use subscribe() to update the UI in response to state changes.
 // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
@@ -101,3 +120,5 @@ store.dispatch({ type: "counter/incremented" });
 // {value: 2}
 store.dispatch({ type: "counter/decremented" });
 // {value: 1}
+
+export default store;

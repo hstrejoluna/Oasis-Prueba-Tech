@@ -55,23 +55,9 @@ const AppI = styled.div`
 `;
 
 export const App = () => {
-  const [restaurants, setRestaurants] = useState([]);
-  const [bars, setBars] = useState([]);
-  const [details, setDetails] = useState({});
-  const [hour, setHour] = useState(hourFormat);
-  const [iapi, setIiapi] = useState(true);
-  const [daynDate] = useState({
-    day: new Date().getDay() + 1,
-    date: new Date().toLocaleString("es-MX", {
-      timeZone: "America/Cancun",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    }),
-  });
+
   const url_img = "https://api-onow.oasishoteles.net/";
   useEffect(() => {
-    const interval = setInterval(() => setHour(hourFormat, 60 * 1000));
     async function getData(day, endpoint, hour) {
       const res = await fetch(
         `https://oasistestbackend.herokuapp.com/data/${day}/${endpoint}/${hour}`

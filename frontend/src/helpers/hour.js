@@ -1,8 +1,7 @@
-import { useState } from "react";
-
 export const hourFormat = () => {
   return new Date().toLocaleTimeString("es-MX", {
     timeZone: "America/Cancun",
+    is12Hour: true,
   });
 };
 
